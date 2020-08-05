@@ -23,6 +23,14 @@ class TransactionsRepository {
     return this.transactions;
   }
 
+  public getCashValue(): number {
+    return this.transactions.reduce((totalSum, transaction): number => {
+      if (transaction.type === 'income') return totalSum + transaction.value;
+
+      return totalSum;
+    }, 0);
+  }
+
   public getBalance(): Balance {
     const income = this.transactions.reduce((totalSum, transaction): number => {
       if (transaction.type === 'income') return totalSum + transaction.value;
